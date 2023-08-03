@@ -37,23 +37,24 @@ jobs:
       - name: Create SBOM with CycloneDX
         uses: CycloneDX/gh-node-module-generatebom@v1
         with: 
-          output: './bom.xml'
+          path: './node_project/'
+          output: 'target/sbom-report.xml'
 
-  SbomResults:
-    needs: CycloneDX
-    runs-on: ubuntu-latest
-    name: Servicenow SBOM Scan Results
+#   SbomResults:
+#     needs: CycloneDX
+#     runs-on: ubuntu-latest
+#     name: Servicenow SBOM Scan Results
 
-    steps:
-       - name: ServiceNow DevOps SBOM Scan Results
-         uses: akhandpratapsingh/custom-actions-task@SBOM
-         with:
-            devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-#             devops-integration-token: ${{ secrets.SN_DEVOPS_INTEGRATION_TOKEN }}
-            devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
-            instance-url: ${{ secrets.SN_INSTANCE_URL }}
-            tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-            context-github: ${{ toJSON(github) }}
-            job-name: 'Servicenow SBOM Scan Results'
-            security-result-attributes: '{"scanner": "Veracode", "applicationName": "Azure", "buildVersion": "v1"}'
+#     steps:
+#        - name: ServiceNow DevOps SBOM Scan Results
+#          uses: akhandpratapsingh/custom-actions-task@SBOM
+#          with:
+#             devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+# #             devops-integration-token: ${{ secrets.SN_DEVOPS_INTEGRATION_TOKEN }}
+#             devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+#             instance-url: ${{ secrets.SN_INSTANCE_URL }}
+#             tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+#             context-github: ${{ toJSON(github) }}
+#             job-name: 'Servicenow SBOM Scan Results'
+#             security-result-attributes: '{"scanner": "Veracode", "applicationName": "Azure", "buildVersion": "v1"}'
 # {"applicationName": "Azure", "buildVersion": "v1"}
