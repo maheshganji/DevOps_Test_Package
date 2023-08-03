@@ -37,7 +37,7 @@ jobs:
       - name: Create SBOM with CycloneDX
         uses: CycloneDX/gh-node-module-generatebom@v1
         with: 
-          path: './node_project/'
+          path: './node_modules/'
           output: 'target/sbom-report.xml'
 
 #   SbomResults:
