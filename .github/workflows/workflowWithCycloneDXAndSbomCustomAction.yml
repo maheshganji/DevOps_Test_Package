@@ -40,7 +40,7 @@ jobs:
         uses: CycloneDX/gh-node-module-generatebom@v1
         with: 
 #           path: './node_modules/'
-          output: './bom.xml'
+          output: 'bom.xml'
 
 #   SbomResults:
 #     needs: CycloneDX
