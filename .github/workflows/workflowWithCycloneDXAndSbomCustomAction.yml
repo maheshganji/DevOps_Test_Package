@@ -5,28 +5,30 @@ on:
     
 jobs:
 
-  build:
-    name: Build
-    runs-on: ubuntu-latest
+#   build:
+#     name: Build
+#     runs-on: ubuntu-latest
   
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@v2
 
-    - name: Set Node.js 14.x
-      uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
+#     - name: Set Node.js 14.x
+#       uses: actions/setup-node@v1
+#       with:
+#         node-version: 14.x
 
-    - name: Install dependencies
-      run: npm install
+#     - name: Install dependencies
+#       run: npm install
 
-    - name: Compile
-      run: npm run build
+#     - name: Compile
+#       run: npm run build
       
   CycloneDX:
-    needs: build
+#     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     name: CycloneDX
     steps:
       - uses: actions/checkout@v3
@@ -36,9 +38,9 @@ jobs:
       - run: npm install
       - name: Create SBOM with CycloneDX
         uses: CycloneDX/gh-node-module-generatebom@v1
-#         with: 
+        with: 
 #           path: './node_modules/'
-#           output: ./bom.xml
+          output: ./bom.xml
 
 #   SbomResults:
 #     needs: CycloneDX
