@@ -37,10 +37,11 @@ jobs:
           node-version: '16'
       - run: npm install
       - name: Create SBOM with CycloneDX
-        uses: CycloneDX/gh-node-module-generatebom@v1
-        with: 
-#           path: './node_modules/'
-          output: 'bom.xml'
+        uses: CycloneDX/gh-dotnet-generate-sbom@master
+        with:
+#           path: ./CycloneDX.sln
+          json: true
+          github-bearer-token: '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'
 
 #   SbomResults:
 #     needs: CycloneDX
