@@ -39,8 +39,9 @@ jobs:
       - name: Create SBOM with CycloneDX
         uses: CycloneDX/gh-dotnet-generate-sbom@master
         with:
-#           path: ./CycloneDX.sln
+          path: ./
           json: true
+          out: './sbom.json'
           github-bearer-token: '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'
 
 #   SbomResults:
