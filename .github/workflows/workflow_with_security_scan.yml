@@ -1,0 +1,44 @@
+name: sbom
+
+on:
+  workflow_dispatch:
+    
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+  
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Set Node.js 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Compile
+      run: npm run build
+      
+  
+
+  SecurityScanResults:
+    needs: build
+    runs-on: ubuntu-latest
+    name: ServiceNow DevOps Security Results
+
+    steps:
+      - name: ServiceNow DevOps Security Results
+        uses: ServiceNow/servicenow-devops-security-result@v2.0
+        with:
+          devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+          devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+          instance-url: ${{ secrets.SN_INSTANCE_URL }}
+          tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+          context-github: ${{ toJSON(github) }}
+          job-name: "ServiceNow DevOps Security Results"
+          security-result-attributes: '{"scanner":"Veracode","applicationName":"azure","buildVersion":"jenkins-Veracode with Step-27"}'
