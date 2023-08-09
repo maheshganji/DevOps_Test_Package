@@ -29,5 +29,5 @@ jobs:
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           context-github: ${{ toJSON(github) }}
           job-name: 'Servicenow SBOM Scan Results'
-          file-path: './sbom.json'
+          file-path: './sbom2.json'
           model-id: 'My Model'
