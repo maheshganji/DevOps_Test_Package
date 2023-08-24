@@ -62,6 +62,7 @@ jobs:
           file-path: './sbom.json'
           model-id: 'My Model'
   changeApproval:
+    needs: CycloneDX
     name: ServiceNow Change Approval
     runs-on: ubuntu-latest
     steps:     
